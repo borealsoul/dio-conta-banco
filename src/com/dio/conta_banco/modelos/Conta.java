@@ -9,19 +9,42 @@ public class Conta {
     private String nomeCliente;
     private double saldo;
 
+    private int InputUsuarioInt(String TextoParaImprimir) {
+        while (true) {
+            System.out.println(TextoParaImprimir);
+            if (leitor.hasNextInt()) {
+                return Integer.parseInt(leitor.nextLine());
+            }
+            System.out.println("Desculpe, mas houve um erro.");
+            leitor.nextLine();
+        }
+
+    }
+
     public Conta() {
-        System.out.println("Digite o número de sua conta:");
-        this.numeroConta = leitor.nextInt();
+        this.numeroConta = InputUsuarioInt("Digite o número de sua conta:");
+        this.agencia = InputUsuarioInt("Digite o número de sua agência:");
 
-        System.out.println("Digite o número de sua agência:");
-        this.agencia = leitor.nextInt();
+        while (true) {
+            System.out.println("Digite seu nome:");
+            this.nomeCliente = leitor.nextLine();
 
-        System.out.println("Digite seu nome:");
-        leitor.nextLine();
-        this.nomeCliente = leitor.nextLine();
+            if (!this.nomeCliente.isEmpty()) {
+                break;
+            }
 
-        System.out.println("Digite seu saldo:");
-        this.saldo = leitor.nextDouble();
+            System.out.println("Desculpe, mas houve um erro.");
+        }
+
+        while (true) {
+            System.out.println("Digite seu saldo:");
+            if (leitor.hasNextDouble()) {
+                this.saldo = Double.parseDouble(leitor.nextLine());
+                break;
+            }
+            System.out.println("Desculpe, mas houve um erro.");
+            leitor.nextLine();
+        }
     }
 
     public int getNumeroConta() {
